@@ -33,6 +33,7 @@ EPI
 tf <- is.na(EPI)
 E <- EPI[!tf]
 summary(EPI) 	# stats
+boxplot(EPI)
 fivenum(EPI,na.rm=TRUE)
 help(stem)
 stem(EPI)		 # stem and leaf plot
@@ -49,3 +50,17 @@ multivariate <- read.csv("Documents/Fall_2023/Data_Analytics/DataAnalyticsFall20
 attach(multivariate)
 mm <- lm(Homeowners~Immigrant)
 mm
+summary(mm)$coef
+plot(Homeowners~Immigrant) 
+help(abline)
+abline(mm) 
+abline(mm,col=2,lwd=3)
+newImmigrantdata <- data.frame(Immigrant = c(0, 20))
+mm <- predict(mm, newImmigrantdata)
+
+abline(mm)
+abline(mm,col=3,lwd=3) # line color = green, line width = 3 attributes(mm)
+attributes(mm)
+mm$coefficients
+
+
