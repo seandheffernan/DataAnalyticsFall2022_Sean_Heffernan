@@ -1,4 +1,4 @@
-nyt1<-read.csv("nyt1.csv")
+nyt1<-read.csv("Documents/Fall_2023/Data_Analytics/DataAnalyticsFall2022_Sean_Heffernan/Data_Sets/nyt1.csv")
 nyt1<-nyt1[which(nyt1$Impressions>0 & nyt1$Clicks>0 & nyt1$Age>0),]
 nnyt1<-dim(nyt1)[1]		# shrink it down!
 sampling.rate=0.9
@@ -13,3 +13,4 @@ classif<-knn(train,test,cg,k=5) #
 classif
 attributes(.Last.value) 
 
+# Reviewed lab and verified how it works

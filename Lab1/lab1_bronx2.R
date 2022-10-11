@@ -24,15 +24,16 @@ if(duplicates[i]==FALSE) {
 }#what are we doing with dupadd? Setting dupadd to each address which doesn't have a duplicate
 
 nsample=450
-sample.int(dim(bronxadd),size=nsample)
 
-addsample<-bronxadd[sample.int(dim(bronxadd),size=nsample),]#I use nval here 
+addsample<-bronxadd[sample(bronxadd$ADDRESSONLY,size=nsample),]#I use nval here 
 # may need to install this package
 library(ggmap)
 addrlist<-paste(addsample$ADDRESSONLY, "NY", addsample$ZIP.CODE, "US", sep=" ") 
 querylist<-geocode(addrlist) #This is cool. Take a break.
+#Need an API key? Not sure what to do now
 
-matched<-(querylist$lat!=0 &&querylist$lon!=0) addsample<-cbind(addsample,querylist$lat,querylist$lon) 
+matched<-(querylist$lat!=0 &&querylist$lon!=0) 
+addsample<-cbind(addsample,querylist$lat,querylist$lon) 
 names(addsample)<-c("ADDRESSONLY","ZIPCODE","Latitude","Longitude")# correct the column na adduse<-merge(bronx1,addsample)
 
 adduse<-adduse[!is.na(adduse$Latitude),]
