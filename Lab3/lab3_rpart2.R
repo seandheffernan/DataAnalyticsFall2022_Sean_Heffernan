@@ -11,9 +11,10 @@ rsq.rpart(fitM) # visualize cross-validation results
 plot(fitM, uniform=TRUE, main="Regression Tree for Mileage ")
 text(fitM, use.n=TRUE, all=TRUE, cex=.8)
 # prune the tree
-pfitM<- prune(fitM, cp=0.01160389) # from cptable??? adjust this to see the effect
+#Tested various different cp values
+pfitM<- prune(fitM, cp=0.132061) # from cptable??? adjust this to see the effect
 # plot the pruned tree
 plot(pfitM, uniform=TRUE, main="Pruned Regression Tree for Mileage")
 text(pfitM, use.n=TRUE, all=TRUE, cex=.8)
-post(pfitM, file = ”ptree2.ps", title = "Pruned Regression Tree for Mileage”)
+post(pfitM, file = "ptree2.ps", title = "Pruned Regression Tree for Mileage")
 

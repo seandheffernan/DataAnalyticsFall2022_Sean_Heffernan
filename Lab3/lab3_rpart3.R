@@ -1,5 +1,6 @@
 library(e1071)
 library(rpart)
+library(mlbench)
 data(Glass, package="mlbench")
 index <- 1:nrow(Glass)
 testindex <- sample(index, trunc(length(index)/3))
@@ -17,5 +18,5 @@ plot(rpart.model,compress=TRUE)
 text(rpart.model, use.n=TRUE)
 plot(rpart.pred)
 
-
+# Read through & understood the code
 
