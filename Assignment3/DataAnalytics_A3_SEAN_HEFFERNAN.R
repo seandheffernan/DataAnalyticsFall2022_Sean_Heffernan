@@ -82,6 +82,47 @@ wilcox.test(nyt4$Clicks, nyt4$Impressions, data=nyt4)
 # Given how little times people actually "Clicked" it was hard to discover any correlations or patterns
 
 #2
+# Will filter out data points where user isn't signed in
+library(dplyr)
+filterNyt4 <- filter(nyt4, Signed_In==1)
+filterNyt12 <- filter(nyt12, Signed_In==1)
+filterNyt13 <- filter(nyt13, Signed_In==1)
+filterNyt22 <- filter(nyt22, Signed_In==1)
+boxplot(filterNyt4)
+boxplot(filterNyt12)
+boxplot(filterNyt13)
+boxplot(filterNyt22)
+
+hist(nyt4$Impressions, col='green')
+hist(nyt4$Clicks, col='red', add=TRUE)
+hist(filterNyt4$Impressions, col='green')
+hist(filterNyt4$Clicks, col='red', add=TRUE)
+hist(filterNyt12$Impressions, col='green')
+hist(filterNyt12$Clicks, col='red', add=TRUE)
+hist(filterNyt13$Impressions, col='green')
+hist(filterNyt13$Clicks, col='red', add=TRUE)
+hist(filterNyt22$Impressions, col='green')
+hist(filterNyt22$Clicks, col='red', add=TRUE)
+
+plot(ecdf(filterNyt4$Impressions), col='green')
+plot(ecdf(filterNyt4$Clicks), col='red', add=TRUE)
+plot(ecdf(filterNyt12$Impressions), col='green')
+plot(ecdf(filterNyt12$Clicks), col='red', add=TRUE)
+plot(ecdf(filterNyt13$Impressions), col='green')
+plot(ecdf(filterNyt13$Clicks), col='red', add=TRUE)
+plot(ecdf(filterNyt22$Impressions), col='green')
+plot(ecdf(filterNyt22$Clicks), col='red', add=TRUE)
+
+shapiro.test(filterNyt4$Clicks[0:5000])
+shapiro.test(filterNyt4$Impressions[0:5000])
+
+wilcox.test(filterNyt4$Clicks, filterNyt4$Impressions, data=filterNyt4)
+
+# With the distribution filter, the age range is no longer as broad, with ages past 90 being considered outliers (as can be seen from the boxplot)
+# The histogram for clicks and impressions remains the same regardless of the filter.
+# The same can be said for the ecdf and significance tests, which shows that regardless of whether 
+# users are signed in or not, the behavior of impressions and clicks remains unchanged. The null hypothesis
+# remains rejected, meaning Clicks and Impressions are not normally distributed with neither data sample being dependent.
 
 
 
