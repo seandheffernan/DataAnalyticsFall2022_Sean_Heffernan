@@ -65,7 +65,7 @@ mean((manhattan_clean$SALE.PRICE-predict(model3,manhattan_clean))[-train3]^2)
 # MSE of each result were extraordinarily high and the multiple r squared values were extremely low (MSE was
 # the quadrillions lol and R squared was below 0.4 indicating low correlation). What this tells me is that 
 # the Land and Gross square feet of a property aren't nearly enough to predict what the potential price of 
-# a property will be. This comes to no surprise considering the different locations of properties amount Manhattan
+# a property will be. This comes to no surprise considering the different locations of properties around Manhattan
 # areas with higher cost of living compared to others. For each sample of data I took roughly half of the dataset
 # and used it as training data. While there were some variations on the R squared value as well as the MSE,
 # they remain consistently around the same values.
@@ -81,6 +81,8 @@ mean((manhattan_clean$SALE.PRICE-predict(model3,manhattan_clean))[-train3]^2)
 # Gross square feet is not enough to create a fitting model for this data as proven in the previous question. Due to the accurate
 # nature of Random Forest due to the many different regressions used, I will use that to model the same data
 # as before and see if the same conclusions are met.
+
+#2a
 install.packages("randomForest")
 library(randomForest)
 set.seed(1)
@@ -97,9 +99,9 @@ predValid <- predict(model, ValidSet, type = "class")
 print(mean((predValid-ValidSet$SALE.PRICE)^2))
 table(predValid, ValidSet$SALE.PRICE)
 importance(model)
-varImpPlot()
+varImpPlot(model)
 # After printing out the mean squared error (not as high as multivariate regression but still very high
-# in the hundred billions), we can see that using land square feet and gross square feet alone is stil
+# in the hundred billions), we can see that using land square feet and gross square feet alone is still
 # inaccurate to properly predict sale price. However, the random forest helps us determine that the gross
 # square feet is more important compared to land square feet as far as an increase in MSE. By using varImpPlot()
 # it is clear that the removal of GROSS SQUARE FEET leads to the largest percentage in increased MSE (around 26%)
@@ -120,7 +122,7 @@ model
 # discovery beforehand it can lead to hours wasted trying to debug when models when perhaps it's the data which was inaccurate.
 # This just goes to show how important preprocessing and data cleaning is when it comes to large datasets. When first conducting
 # the multivariate regression, I was very unsure about the results I was getting due to the obscenely high MSE values
-# anad low R squared values. However, after doing some more thinking (two variables in a 30 column dataset shouldn't predict
+# and low R squared values. However, after doing some more thinking (it is unlikely for two variables in a 30 column dataset toZ predict
 # EVERYTHING) and the follow-up random forest model, I was more confident with my conclusions.
 
 #3
@@ -132,7 +134,7 @@ model
 # for regression as I had intended for. That being said, plotting out the KMeans was still useful for visualizing 
 # the relationship between price and gross square feet and identifying some clustering - but again, it couldn't 
 # exactly be used to predict the desired label (predicting prices for certain gross & land square feet). As an overall 
-# conclusion, it's apparent that a fine balance need to be struck between too many and too little features being used
+# conclusion, it's apparent that a fine balance needed to be struck between too many and too little features being used
 # when creating an accurate regression model in efficient time. Too many features and the model creation might take too long,
 # too few features and you risk an inaccurate model (like the one we put together during this assignment).
 
